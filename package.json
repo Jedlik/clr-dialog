@@ -1,5 +1,5 @@
 {
-  "name": "clr-dialog",
+  "name": "@jedlikbp/clr-dialog",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
