@@ -1,22 +1,22 @@
 {
-  "name": "clr-dialog",
+  "name": "@jedlikbp/clr-dialog",
   "version": "0.0.9",
   "description": "Material Dialog service for Clarity.",
   "author": "Scenius",
   "repository": {
     "type": "git",
-    "url": "https://github.com/scenius-software/clr-dialog.git"
+    "url": "https://github.com/Jedlik/clr-dialog.git"
   },
   "bugs": {
-    "url": "https://github.com/scenius-software/clr-dialog/issues"
+    "url": "https://github.com/Jedlik/clr-dialog/issues"
   },
-  "homepage": "https://github.com/scenius-software/clr-dialog",
+  "homepage": "https://github.com/Jedlik/clr-dialog",
   "peerDependencies": {
-    "@angular/common": "^14.0.0",
-    "@angular/core": "^14.0.0",
-    "@angular/animations": "^14.0.0",
-    "@angular/cdk": "^14.0.0",
-    "@clr/ui": "^13.0.0",
-    "@clr/angular": "^13.0.0"
+    "@angular/common": "^15.0.0",
+    "@angular/core": "^15.0.0",
+    "@angular/animations": "^15.0.0",
+    "@angular/cdk": "^15.0.0",
+    "@clr/ui": "^15.0.0",
+    "@clr/angular": "^15.0.0"
   }
 }
