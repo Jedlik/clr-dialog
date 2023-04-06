@@ -31,6 +31,6 @@ jobs:
       - name: Build Library
         run: ng build --project clr-dialog
       - name: Publish Library to NPM
-        run: npm publish ./dist/clr-dialog
+        run: npm publish ./dist/clr-dialog --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
