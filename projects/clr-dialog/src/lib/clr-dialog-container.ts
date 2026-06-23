@@ -50,6 +50,7 @@ export function throwClrDialogContentAlreadyAttachedError() {
   selector: 'clr-dialog-container',
   templateUrl: 'clr-dialog-container.html',
   styleUrls: [],
+  standalone: false,
   encapsulation: ViewEncapsulation.None,
   // Using OnPush for dialogs caused some G3 sync issues. Disabled until we can track them down.
   // tslint:disable-next-line:validate-decorators
