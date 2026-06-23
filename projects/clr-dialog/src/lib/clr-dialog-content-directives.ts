@@ -27,6 +27,7 @@ let dialogElementUid = 0;
  */
 @Directive({
   selector: `button[clr-dialog-close], button[clrDialogClose]`,
+  standalone: false,
   exportAs: 'clrDialogClose',
   host: {
     '(click)': 'dialogRef.close(dialogResult)',
@@ -73,6 +74,7 @@ export class ClrDialogClose implements OnInit, OnChanges {
  */
 @Directive({
   selector: '[clr-dialog-title], [clrDialogTitle]',
+  standalone: false,
   exportAs: 'clrDialogTitle',
   host: {
     'class': 'modal-title',
@@ -110,6 +112,7 @@ export class ClrDialogTitle implements OnInit {
  */
 @Directive({
   selector: `[clr-dialog-content], clr-dialog-content, [clrDialogContent]`,
+  standalone: false,
   host: { 'class': 'clr-dialog-content' }
 })
 export class ClrDialogContent { }
@@ -121,6 +124,7 @@ export class ClrDialogContent { }
  */
 @Directive({
   selector: `[clr-dialog-actions], clr-dialog-actions, [clrDialogActions]`,
+  standalone: false,
   host: { 'class': 'modal-footer' }
 })
 export class ClrDialogActions { }

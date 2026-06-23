@@ -14,7 +14,7 @@ import {
   OverlayRef,
   ScrollStrategy,
 } from '@angular/cdk/overlay';
-import { ComponentPortal, ComponentType, PortalInjector, TemplatePortal } from '@angular/cdk/portal';
+import { ComponentPortal, ComponentType, TemplatePortal } from '@angular/cdk/portal';
 import { Location } from '@angular/common';
 import {
   Inject,
@@ -24,6 +24,7 @@ import {
   OnDestroy,
   Optional,
   SkipSelf,
+  StaticProvider,
   TemplateRef,
 } from '@angular/core';
 import { defer, Observable, of as observableOf, Subject } from 'rxjs';
@@ -221,11 +222,12 @@ export class ClrDialogService implements OnDestroy {
    */
   private _attachDialogContainer(overlay: OverlayRef, config: ClrDialogConfig): ClrDialogContainer {
     const userInjector = config && config.viewContainerRef && config.viewContainerRef.injector;
-    const injector = new PortalInjector(userInjector || this._injector, new WeakMap([
-      [ClrDialogConfig, config]
-    ]));
+    const injector = Injector.create({
+      parent: userInjector || this._injector,
+      providers: [{ provide: ClrDialogConfig, useValue: config }],
+    });
     const containerPortal = new ComponentPortal(ClrDialogContainer,
-      config.viewContainerRef, injector, config.componentFactoryResolver);
+      config.viewContainerRef, injector);
     const containerRef = overlay.attach<ClrDialogContainer>(containerPortal);
 
     return containerRef.instance;
@@ -289,7 +291,7 @@ export class ClrDialogService implements OnDestroy {
   private _createInjector<T>(
     config: ClrDialogConfig,
     dialogRef: ClrDialogRef<T>,
-    dialogContainer: ClrDialogContainer): PortalInjector {
+    dialogContainer: ClrDialogContainer): Injector {
 
     const userInjector = config && config.viewContainerRef && config.viewContainerRef.injector;
 
@@ -297,21 +299,21 @@ export class ClrDialogService implements OnDestroy {
     // content are created out of the same ViewContainerRef and as such, are siblings for injector
     // purposes. To allow the hierarchy that is expected, the ClrDialogContainer is explicitly
     // added to the injection tokens.
-    const injectionTokens = new WeakMap<any, any>([
-      [ClrDialogContainer, dialogContainer],
-      [CLR_DIALOG_DATA, config.data],
-      [ClrDialogRef, dialogRef]
-    ]);
+    const providers: StaticProvider[] = [
+      { provide: ClrDialogContainer, useValue: dialogContainer },
+      { provide: CLR_DIALOG_DATA, useValue: config.data },
+      { provide: ClrDialogRef, useValue: dialogRef },
+    ];
 
     if (config.direction &&
       (!userInjector || !userInjector.get<Directionality | null>(Directionality, null))) {
-      injectionTokens.set(Directionality, {
-        value: config.direction,
-        change: observableOf()
+      providers.push({
+        provide: Directionality,
+        useValue: { value: config.direction, change: observableOf() },
       });
     }
 
-    return new PortalInjector(userInjector || this._injector, injectionTokens);
+    return Injector.create({ providers, parent: userInjector || this._injector });
   }
 
   /**

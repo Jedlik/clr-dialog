@@ -12,11 +12,11 @@
   },
   "homepage": "https://github.com/Jedlik/clr-dialog",
   "peerDependencies": {
-    "@angular/common": ">= 14.0.0",
-    "@angular/core": ">= 14.0.0",
-    "@angular/animations": ">= 14.0.0",
-    "@angular/cdk": ">= 14.0.0",
-    "@clr/ui": ">= 13.0.0",
-    "@clr/angular": ">= 13.0.0"
+    "@angular/common": ">= 21.1.0",
+    "@angular/core": ">= 21.1.0",
+    "@angular/animations": ">= 21.1.0",
+    "@angular/cdk": ">= 21.1.0",
+    "@clr/ui": ">= 18.0.0",
+    "@clr/angular": ">= 18.0.0"
   }
 }

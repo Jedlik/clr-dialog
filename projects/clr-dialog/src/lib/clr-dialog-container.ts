@@ -28,7 +28,7 @@ import {
   CdkPortalOutlet,
   TemplatePortal
 } from '@angular/cdk/portal';
-import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
+import { ConfigurableFocusTrap, ConfigurableFocusTrapFactory } from '@angular/cdk/a11y';
 import { ClrDialogConfig } from './clr-dialog-config';
 
 
@@ -50,6 +50,7 @@ export function throwClrDialogContentAlreadyAttachedError() {
   selector: 'clr-dialog-container',
   templateUrl: 'clr-dialog-container.html',
   styleUrls: [],
+  standalone: false,
   encapsulation: ViewEncapsulation.None,
   // Using OnPush for dialogs caused some G3 sync issues. Disabled until we can track them down.
   // tslint:disable-next-line:validate-decorators
@@ -74,7 +75,7 @@ export class ClrDialogContainer extends BasePortalOutlet {
   @ViewChild(CdkPortalOutlet, { static: true }) _portalOutlet: CdkPortalOutlet;
 
   /** The class that traps and manages focus within the dialog. */
-  private _focusTrap: FocusTrap;
+  private _focusTrap: ConfigurableFocusTrap;
 
   /** Element that was focused before the dialog was opened. Save this to restore upon close. */
   private _elementFocusedBeforeDialogWasOpened: HTMLElement | null = null;
@@ -93,7 +94,7 @@ export class ClrDialogContainer extends BasePortalOutlet {
 
   constructor(
     private _elementRef: ElementRef,
-    private _focusTrapFactory: FocusTrapFactory,
+    private _focusTrapFactory: ConfigurableFocusTrapFactory,
     private _changeDetectorRef: ChangeDetectorRef,
     @Optional() @Inject(DOCUMENT) private _document: any,
     /** The dialog configuration. */
